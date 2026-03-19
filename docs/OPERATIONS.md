@@ -47,7 +47,7 @@ Worker-specific counter:
 `worker_risk_assessments_total{result="success|duplicate|missing_transaction|error"}`
 
 | `result` | Meaning |
-| -------- | ------- |
+| --- | --- |
 | `success` | New risk assessment created. |
 | `duplicate` | Event already processed for the same `event_id`. |
 | `missing_transaction` | Event references a transaction that does not exist. |
