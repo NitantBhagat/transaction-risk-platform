@@ -1,9 +1,10 @@
-## Deployment and Environments
+# Deployment and environments
 
-This document outlines how to deploy the Transaction Risk Platform across environments
-and how configuration and secrets should be managed.
+This document outlines how to deploy the Transaction Risk Platform across environments and how configuration and secrets should be managed.
 
-### Environments
+**See also:** [Operations runbook](OPERATIONS.md) for day-to-day runtime and troubleshooting.
+
+## Environments
 
 The repository assumes three primary environments:
 
@@ -11,10 +12,9 @@ The repository assumes three primary environments:
 - `stage`: pre-production validation
 - `prod`: production
 
-Terraform environment-specific configuration can be provided via `.tfvars` files
-and/or dedicated environment directories.
+Terraform environment-specific configuration can be provided via `.tfvars` files and/or dedicated environment directories.
 
-### Terraform structure
+## Terraform structure
 
 The `infra/terraform` directory contains:
 
@@ -43,10 +43,11 @@ terraform plan -var-file="envs/dev.tfvars"
 terraform apply -var-file="envs/dev.tfvars"
 ```
 
-### Secrets and configuration
+More detail: [Terraform README](../infra/terraform/README.md).
 
-Runtime configuration is driven by environment variables (see `.env.example`).
-For production environments:
+## Secrets and configuration
+
+Runtime configuration is driven by environment variables (see `.env.example`). For production environments:
 
 - Do **not** commit secrets.
 - Configure:
@@ -66,7 +67,7 @@ Recommended pattern on AWS:
 
 Terraform should reference only **parameter names/ARNs** as variables, not raw secrets.
 
-### CI/CD flow (high level)
+## CI/CD flow (high level)
 
 The CI workflow (`.github/workflows/ci.yml`) currently:
 
@@ -90,10 +91,9 @@ A typical production CI/CD flow would extend this with:
      - Image tags
      - Environment-specific variables
 
-This repository intentionally leaves registry names, credentials, and target
-platform configuration as operator-provided values.
+This repository intentionally leaves registry names, credentials, and target platform configuration as operator-provided values.
 
-### Operator-provided values
+## Operator-provided values
 
 To deploy to real environments, operators must provide:
 
@@ -105,5 +105,4 @@ To deploy to real environments, operators must provide:
   - OTEL exporter endpoints (if used)
 - Any additional environment-specific feature flags or limits.
 
-These should be passed securely (e.g., via CI secrets, parameter store, or
-secret manager) and **never** committed to the repository.
+These should be passed securely (e.g., via CI secrets, parameter store, or secret manager) and **never** committed to the repository.

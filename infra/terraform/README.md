@@ -1,4 +1,4 @@
-## Terraform bootstrap
+# Terraform bootstrap
 
 This directory contains the **Terraform bootstrap** for the Transaction Risk Platform.
 
@@ -7,20 +7,16 @@ It is intentionally minimal and focuses on:
 - Defining the AWS provider and shared variables.
 - Establishing a place to add service-specific infrastructure in later steps.
 
-### Files
+**See also:** [Deployment guide](../../docs/DEPLOYMENT.md) for environments and secrets.
 
-- `main.tf`:
-  - Terraform and AWS provider configuration.
-  - Shared locals for `project`, `environment`, and `common_tags`.
-  - Backend configuration block is left commented for you to adapt (e.g. S3 + DynamoDB).
-- `variables.tf`:
-  - `aws_region`, `project`, `environment`.
-- `outputs.tf`:
-  - Echoes `project` and `environment` for quick visibility.
-- `envs/dev.tfvars`:
-  - Example variable values for a `dev` environment.
+## Files
 
-### Usage (example)
+- **`main.tf`** — Terraform and AWS provider configuration; shared locals for `project`, `environment`, and `common_tags`; backend block is commented (e.g. S3 + DynamoDB).
+- **`variables.tf`** — `aws_region`, `project`, `environment`.
+- **`outputs.tf`** — Echoes `project` and `environment` for quick visibility.
+- **`envs/dev.tfvars`** — Example variable values for a `dev` environment.
+
+## Usage (example)
 
 ```bash
 cd infra/terraform
@@ -37,7 +33,7 @@ terraform apply -var-file="envs/dev.tfvars"
 
 Service-specific modules and resources (API gateways, compute, databases, Redis, etc.) can be added here later without changing the basic layout.
 
-### Operational notes
+## Operational notes
 
 In a production environment you will typically:
 
@@ -47,10 +43,9 @@ In a production environment you will typically:
 
 Those concerns are intentionally left out of this bootstrap and should be added according to your target platform's best practices.
 
-### Environments
+## Environments
 
-You can model multiple environments (e.g., `stage`, `prod`) by adding additional
-`*.tfvars` files under `envs/`:
+You can model multiple environments (e.g., `stage`, `prod`) by adding additional `*.tfvars` files under `envs/`:
 
 - `envs/stage.tfvars`
 - `envs/prod.tfvars`
