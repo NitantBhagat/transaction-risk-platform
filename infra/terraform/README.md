@@ -67,6 +67,3 @@ Then reference the appropriate file when planning/applying:
 terraform plan -var-file="envs/stage.tfvars"
 terraform apply -var-file="envs/stage.tfvars"
 ```
-
-
-

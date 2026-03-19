@@ -6,9 +6,9 @@
 - Copy `.env.example` to `.env` and adjust values as needed.
 - Start the stack:
 
-```bash
-docker compose up --build
-```
+  ```bash
+  docker compose up --build
+  ```
 
 Services will expose `/health` and `/metrics` on their respective ports.
 
@@ -16,18 +16,18 @@ Services will expose `/health` and `/metrics` on their respective ports.
 
 - In Docker, the worker container runs the risk pipeline loop via:
 
-```bash
-python -m services.worker.main
-```
+  ```bash
+  python -m services.worker.main
+  ```
 
 - To run the worker locally without Docker:
 
-```bash
-export APP_ENV=local
-export POSTGRES_HOST=localhost
-export REDIS_HOST=localhost
-python -m services.worker.main
-```
+  ```bash
+  export APP_ENV=local
+  export POSTGRES_HOST=localhost
+  export REDIS_HOST=localhost
+  python -m services.worker.main
+  ```
 
 The worker will:
 
@@ -41,14 +41,11 @@ The worker will:
   - `GET /health` on each service.
 - Metrics:
   - `GET /metrics` on each service (Prometheus exposition format).
-  - Worker-specific counter:
-
-    - `worker_risk_assessments_total{result="success|duplicate|missing_transaction|error"}`
-
-      - **success**: new risk assessment created.
-      - **duplicate**: event already processed for the same `event_id`.
-      - **missing_transaction**: event references a transaction that does not exist.
-      - **error**: unrecoverable error after retries.
+  - Worker-specific counter: `worker_risk_assessments_total{result="success|duplicate|missing_transaction|error"}`
+    - **success**: new risk assessment created.
+    - **duplicate**: event already processed for the same `event_id`.
+    - **missing_transaction**: event references a transaction that does not exist.
+    - **error**: unrecoverable error after retries.
 
 ### Handling common failures
 
@@ -89,4 +86,3 @@ The worker will:
   - Deploy the new secret to all backend services simultaneously (via environment or secret manager).
   - Restart services to pick up the new key.
   - If you later adopt key IDs (`kid`) and key sets, you can support overlapping keys for smoother rotation; this is a recommended future enhancement but not implemented yet.
-

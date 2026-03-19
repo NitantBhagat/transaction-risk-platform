@@ -23,7 +23,7 @@ The `infra/terraform` directory contains:
 
 You can model additional environments by creating:
 
-```bash
+```text
 infra/terraform/envs/stage.tfvars
 infra/terraform/envs/prod.tfvars
 ```
@@ -107,4 +107,3 @@ To deploy to real environments, operators must provide:
 
 These should be passed securely (e.g., via CI secrets, parameter store, or
 secret manager) and **never** committed to the repository.
-
