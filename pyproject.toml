@@ -1,0 +1,31 @@
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["shared", "services", "tests"]
+select = ["E", "F", "I", "B", "UP"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+plugins = []
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py"]
+testpaths = ["tests"]
+addopts = "-q"
+
